@@ -42,8 +42,7 @@ app.use(function(req,res,next){
     next();
 });
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 var accessLog = fs.createWriteStream('access.log', {flags: 'a'});
 app.use(logger('dev',{stream: accessLog}));
 
