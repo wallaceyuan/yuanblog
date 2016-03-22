@@ -1,5 +1,5 @@
 var express = require('express');
-var userModel = require('../model/user');
+var modelCollect = require('../model/user');
 var middleware = require('../middleware/index');
 var crypto = require('crypto');
 var router = express.Router();
@@ -18,7 +18,7 @@ router.post('/reg',middleware.checkNotLogin,function(req,res){
     delete user.repassword;
     user.password = md5(user.password);
     user.avatar = "https://secure.gravatar.com/avatar/"+md5(user.email)+"?s=48";
-    userModel.create(user,function(err,doc){
+    modelCollect.userModel.create(user,function(err,doc){
         if(err){
             req.flash('error', '注册失败!');
             res.redirect('back');//返回到上一个页面
@@ -39,14 +39,14 @@ router.get('/login',middleware.checkNotLogin,function(req,res){
 router.post('/login',middleware.checkNotLogin,function(req,res){
     var user = req.body;
     user.password = md5(user.password);
-    userModel.findOne(user,function(err,doc){
-        console.log(doc);
+    modelCollect.userModel.findOne(user,function(err,doc){
         if(err ||doc == null){
             req.flash('error', '登录失败!');
             res.redirect('/users/login');
         }else{
             req.flash('success', '登录成功!');
-            req.session.user = user;//用户信息存入 session
+            req.session.user = doc;//用户信息存入 session
+            console.log(req.session.user);
             res.redirect('/');//注册成功后返回主页
         }
     });

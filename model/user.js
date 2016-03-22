@@ -15,4 +15,23 @@ var userSchema = new mongoose.Schema({
 //再定义model
 var userModel = mongoose.model('user',userSchema);
 
-module.exports = userModel;
+var articleSchema = new mongoose.Schema({
+    user:{type: String,ref:'user'},
+    title: String,
+    content:String,
+    img:String,
+    createAt:{type: Date, default: Date.now},
+    comments: [{user:{type:String,ref:'user'},content:String,createAt:{type: Date, default: Date.now}}],
+    pv: {type:Number,default:0}
+});
+
+//再定义model
+var articleModel = mongoose.model('article',articleSchema);
+
+
+var modelCollect = {
+    userModel:userModel,
+    articleModel:articleModel
+}
+
+module.exports = modelCollect;

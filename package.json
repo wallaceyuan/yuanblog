@@ -16,5 +16,12 @@
     "express-session": "^1.13.0",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "async": "^1.5.2",
+    "markdown": "^0.5.0",
+    "mongoose": "^4.4.8",
+    "multer": "^1.1.0",
+    "path": "^0.12.7"
   }
 }

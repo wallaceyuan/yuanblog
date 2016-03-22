@@ -15,6 +15,7 @@ var articles = require('./routes/articles');
 var session = require('express-session');
 var MongoStore = require('connect-mongo/es5')(session);
 var flash = require('connect-flash');
+var fs = require('fs');
 var app = express();
 
 //设置模板文件的存放路径
@@ -42,7 +43,17 @@ app.use(function(req,res,next){
 });
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+
+var accessLog = fs.createWriteStream('access.log', {flags: 'a'});
+app.use(logger('dev',{stream: accessLog}));
+
+var errorLog = fs.createWriteStream('error.log', {flags: 'a'});
+app.use(function (err, req, res, next) {
+    var meta = '[' + new Date() + '] ' + req.url + '\n';
+    errorLog.write(meta + err.stack + '\n');
+    next();
+});
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -59,7 +70,8 @@ app.use('/articles', articles);
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
-  next(err);
+  res.render("404");
+  //next(err);
 });
 
 // error handlers
