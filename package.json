@@ -15,9 +15,7 @@
     "express": "~4.13.1",
     "express-session": "^1.13.0",
     "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0"
-  },
-  "devDependencies": {
+    "serve-favicon": "~2.3.0",
     "async": "^1.5.2",
     "crypto": "0.0.3",
     "markdown": "^0.5.0",
