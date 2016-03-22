@@ -4,7 +4,7 @@
 // 引入此模块
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1:27017/yuanblog');
+mongoose.connect('mongodb://123.57.143.189:27017/yuanblog');
 //定义模型 确定数据库里表结构
 var userSchema = new mongoose.Schema({
     username:String,

@@ -26,7 +26,7 @@ app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
 //使用了会话中间件之后，req.session
 var mongoose = require('mongoose');
-connection = mongoose.createConnection('mongodb://127.0.0.1:27017/yuanblog');
+connection = mongoose.createConnection('mongodb://123.57.143.189:27017/yuanblog');
 app.use(session({
     secret: 'yuanblog',
     resave: false,
