@@ -12,6 +12,9 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var articles = require('./routes/articles');
+var uploads = require('./routes/uploads');
+
+
 var session = require('express-session');
 var MongoStore = require('connect-mongo/es5')(session);
 var flash = require('connect-flash');
@@ -65,6 +68,8 @@ app.use(function(req,res,next){
 app.use('/', routes);
 app.use('/users', users);
 app.use('/articles', articles);
+app.use('/uploads', uploads);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
